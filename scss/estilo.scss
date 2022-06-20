@@ -9,7 +9,8 @@
 
 /*Variables*/
 
-$color-green:#78ffd6;
+//$color-green:#78ffd6;
+$color-green:#E9FF33;
 :root {
     --primary: $color-green;
     --primary-light: #212d37;
@@ -20,6 +21,7 @@ $color-green:#78ffd6;
 @import "footer";
 @import "nav";
 @import "nosotros";
+@import "formContacto";
 @mixin subtitulo {
     text-align: center;
     color: grey;

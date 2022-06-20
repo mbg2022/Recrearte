@@ -150,21 +150,120 @@ if (ninieras.length > 0) {
 }
 */
 
-/*Accordion
+/*Inicio Cargar Actividades*/
+
 /*
-  1.Grab the accordion buttons from the DOM
-  2. go through each accordion button one by one
-  3. Use the classlist dom method in combination with the toggle method provided by the DOM to add or remove the "is-open" class. At this point, the accordion button should be able to switch back and forth between its font awesome icons but there is no content inside of it. This is because of the overflow:hidden and the max-height of zero; it is hiding our content. So now we must use javascript to change these values with DOM CSS
-  4. get the div that has the content of the accordion button you are currently looking at; we do this using the .nextElementSibling method which allows us to look at the html element that is directly next to the current html element we are looking at. Since we are currently looking at a button (accordion button), the next element after that is the div with the class accordion-content. This is exactly what we want because it allows us to work with the div that has the content that we want to display. Also please note that we could have got to this div in another way but this is the "shortest path" to our answer.
-  
-  5. set the max-height based on whether the current value of the max-height css property. If the max-height is currently 0 (if the page has just been visited for the first time) or null (if it has been toggled once already) which means that it is closed, you will give it an actual value so the content will be shown; if not then that means the max-height currently has a value and you can set it back to null to close it.
-  6. If the accordion is closed we set the max-height of the currently hidden text inside the accor
+class Actividades {
+    constructor(nombreActividad, valorActividad, fechaActividad) {
+        this.nombreActividad = nombreActividad
+        this.valorActividad = valorActividad
+            // this.fechaActividad = newDate(fechaActividad)
+        this.fechaActividad = fechaActividad
+    }
+    calcularCuantosDiasFaltan(nombreActividad, fechaActividad, fechaHoy) {
+        alert("fecha hoy " + Date.parse(fechaHoy))
+        let difMiliseg = Math.abs(fechaActividad - Date.parse(fechaHoy))
+        alert("resta " + Math.abs(fechaActividad - Date.parse(fechaHoy)))
+        let resta = difMiliseg / (1000 * 60 * 60 * 24)
+        alert("dias de diferencia: " + resta)
+
+        //alert("entra a cuantos días faltan" + " Nombre de actividad: " + nombreActividad + " Valor actividad: " + valorActividad + " fecha actividad " + fechaActividad + " fecha de hoy " + fechaHoy)
+
+    }
+}
+//Declaro el array de actividades
+/*
+const actividades = []
+
+let cantidadActividades = +prompt("Ingrese la cantidad de actividades que quiere dar de alta: ")
+
+if (cantidadActividades > 0) {
+    for (i = 0; i < cantidadActividades; i++) {
+        // let nombreActividad = prompt("Ingresar nombre actividad");
+        let nombreActividad = prompt("Ingrese el nombre de la actividad")
+        let valorActividad = +prompt("Ingrese el valor de la actividad")
+
+        let fechaActividad = Date.parse(prompt("Ingrese la fecha en la que se realizará la actividad en formato AAAA-MM-DD"))
 
 
+        actividades.push(new Actividades(nombreActividad, valorActividad, fechaActividad))
+    }
+} else {
+    alert("El valor ingresado es incorrecto")
+}
+
+if (actividades.length > 0) {
+    let verDetalleActividades = prompt("Ha ingresado " + actividades.length + "actividades a la base de datos, desea ver el detalle? S/N")
+
+
+    if (verDetalleActividades.toLocaleUpperCase() === "S") {
+        alert("Ver detalle: ");
+        for (const actividad of actividades) {
+
+            alert("Nombre actividad: " + actividad.nombreActividad + ", valor Actividad: " +
+                actividad.valorActividad + ", fecha de actividad: " + actividad.fechaActividad)
+            actividad.calcularCuantosDiasFaltan(actividad.nombreActividad, actividad.fechaActividad, new Date())
+        }
+
+        1
+
+        1
+
+
+    } else {
+        alert("ocultarDetalle")
+    }
+} else {
+    alert("ocurio un error al ingresar las actividades a la base")
+}
+
+
+Fin Cargar Actividades */
+
+
+
+/*Esta había sido la idea sin la interacción con el Dom */
+//Declaro el array de actividades
+/*
+const actividades = []
+let cantidadActividades = +prompt("Ingrese la cantidad de actividades que quiere dar de alta: ")
+
+if (cantidadActividades > 0) {
+    for (i = 0; i < cantidadActividades; i++) {
+        // let nombreActividad = prompt("Ingresar nombre actividad");
+        let nombreActividad = prompt("Ingrese el nombre de la actividad")
+        let valorActividad = +prompt("Ingrese el valor de la actividad")
+        let fechaActividad = Date.parse(prompt("Ingrese la fecha en la que se realizará la actividad en formato AAAA-MM-DD"))
+        actividades.push(new Actividades(nombreActividad, valorActividad, fechaActividad))
+    }
+} else {
+    alert("El valor ingresado es incorrecto")
+}
+
+if (actividades.length > 0) {
+    let verDetalleActividades = prompt("Ha ingresado " + actividades.length + "actividades a la base de datos, desea ver el detalle? S/N")
+
+    if (verDetalleActividades.toLocaleUpperCase() === "S") {
+        alert("Ver detalle: ");
+        for (const actividad of actividades) {
+
+            alert("Nombre actividad: " + actividad.nombreActividad + ", valor Actividad: " +
+                actividad.valorActividad + ", fecha de actividad: " + actividad.fechaActividad)
+            actividad.calcularCuantosDiasFaltan(actividad.nombreActividad, actividad.fechaActividad, new Date())
+        }
+    } else {
+        alert("ocultarDetalle")
+    }
+} else {
+    alert("ocurio un error al ingresar las actividades a la base")
+}
 */
 
-const accordionBtns = document.querySelectorAll(".accordion");
+/*Desafíos Incluye Entrega 20-6 y 22-6*/
 
+
+/*Accordion*/
+const accordionBtns = document.querySelectorAll(".accordion");
 accordionBtns.forEach((accordion) => {
     accordion.onclick = function() {
 
@@ -174,12 +273,61 @@ accordionBtns.forEach((accordion) => {
         console.log(content);
 
         if (content.style.maxHeight) {
-            //this is if the accordion is open
+            //Si está abierto
             content.style.maxHeight = null;
         } else {
-            //if the accordion is currently closed
+            //Si está cerrado
             content.style.maxHeight = content.scrollHeight + "px";
             console.log(content.style.maxHeight);
         }
     };
 });
+
+
+/*Inicio Cargar Actividades*/
+class Actividades {
+    constructor(nombreActividad, valorActividad, fechaActividad) {
+        this.nombreActividad = nombreActividad
+        this.valorActividad = valorActividad
+        this.fechaActividad = fechaActividad
+    }
+    calcularCuantosDiasFaltan(nombreActividad, fechaActividad, fechaHoy) {
+        let difMiliseg = Math.abs(fechaActividad - Date.parse(fechaHoy))
+        let resta = difMiliseg / (1000 * 60 * 60 * 24)
+    }
+}
+
+function calcularCuantosDiasFaltan(nombreActividad, fechaActividad, fechaHoy) {
+    let fechaHoyEnMili = Date.parse(fechaHoy);
+    let fechaActividadEnMili = Date.parse(fechaActividad);
+
+    const diffTime = Math.abs(fechaActividadEnMili - fechaHoyEnMili);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    console.log(diffTime + " milliseconds");
+    console.log(diffDays + " days");
+    return diffDays;
+}
+
+
+/*Levantar las Actividades del form*/
+let nombreActividad, valorActividad, fechaActividad;
+const actividades = []
+
+function obtenerDatos() {
+    nombreActividad = document.getElementById("nombreActividad").value;
+    valorActividad = document.getElementById("valorActividad").value;
+    fechaActividad = document.getElementById("fechaActividad").value;
+
+    let actividad = [nombreActividad, valorActividad, fechaActividad];
+
+    actividades.push(new Actividades(nombreActividad, valorActividad, fechaActividad));
+
+    let diasRestantes = calcularCuantosDiasFaltan(nombreActividad, fechaActividad, new Date());
+
+    let contenedor = document.querySelector('#contenido');
+    let p = document.createElement('p');
+    p.innerText = "Se creó la actividad :" + nombreActividad + " Faltan : " + diasRestantes + " días, el valor de la actividad es de:   " + valorActividad + " Pesos ";
+    contenedor.appendChild(p);
+
+    return actividad;
+}
